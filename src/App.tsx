@@ -42,7 +42,7 @@ const modules: ModuleItem[] = [
   },
 ]
 
-type View = 'home' | 'protected-facility-distance'
+type View = 'home' | 'protected-facility-distance' | 'facility-input'
 
 function App() {
   const [view, setView] = useState<View>('home')
@@ -79,12 +79,22 @@ function App() {
       </header>
 
       <main id="main-content">
-        {view === 'home' ? (
+        {view === 'home' && (
           <HomeView onOpenSafetyDistance={() => setView('protected-facility-distance')} />
-        ) : (
+        )}
+
+        {view === 'protected-facility-distance' && (
           <SafetyDistanceView
             title={activeModule?.name ?? '보호시설과의 안전거리'}
             onBack={() => setView('home')}
+            onStart={() => setView('facility-input')}
+          />
+        )}
+
+        {view === 'facility-input' && (
+          <FacilityInputView
+            onBack={() => setView('protected-facility-distance')}
+            onHome={() => setView('home')}
           />
         )}
       </main>
@@ -92,7 +102,7 @@ function App() {
       <footer className="app-footer">
         <div className="shell-width footer-inner">
           <span>액화수소 인수기지 안전평가 통합플랫폼</span>
-          <span>현재 검수범위: 공통 화면 및 보호시설 안전거리 진입화면</span>
+          <span>현재 검수범위: 공통 화면 · 보호시설 안전거리 · 사업소 정보 입력</span>
         </div>
       </footer>
     </div>
@@ -187,7 +197,15 @@ function HomeView({ onOpenSafetyDistance }: { onOpenSafetyDistance: () => void }
   )
 }
 
-function SafetyDistanceView({ title, onBack }: { title: string; onBack: () => void }) {
+function SafetyDistanceView({
+  title,
+  onBack,
+  onStart,
+}: {
+  title: string
+  onBack: () => void
+  onStart: () => void
+}) {
   return (
     <div className="shell-width page-content">
       <nav className="krds-breadcrumb-wrap" aria-label="현재 경로">
@@ -233,17 +251,159 @@ function SafetyDistanceView({ title, onBack }: { title: string; onBack: () => vo
 
       <section className="next-step-panel">
         <div>
-          <span className="eyebrow">다음 개발 화면</span>
-          <h2>사업소와 설비 정보를 먼저 입력합니다.</h2>
+          <span className="eyebrow">평가 시작</span>
+          <h2>사업소 정보부터 입력합니다.</h2>
           <p>
-            다음 단계에서는 공통 입력정보를 정리하고, 보호시설 안전거리 계산에 필요한 항목만
-            순서대로 보여줍니다.
+            공통정보는 한 번만 입력하고 이후 설비 정보와 분석조건에서 다시 사용합니다.
           </p>
         </div>
-        <button type="button" className="krds-btn large primary" disabled>
-          입력화면 준비 중
+        <button type="button" className="krds-btn large primary" onClick={onStart}>
+          사업소 정보 입력
         </button>
       </section>
+    </div>
+  )
+}
+
+function FacilityInputView({
+  onBack,
+  onHome,
+}: {
+  onBack: () => void
+  onHome: () => void
+}) {
+  const [confirmed, setConfirmed] = useState(false)
+
+  return (
+    <div className="shell-width page-content input-page">
+      <nav className="krds-breadcrumb-wrap" aria-label="현재 경로">
+        <ol className="breadcrumb">
+          <li className="home">
+            <button type="button" className="breadcrumb-button" onClick={onHome}>홈</button>
+          </li>
+          <li>
+            <button type="button" className="breadcrumb-button" onClick={onBack}>
+              보호시설과의 안전거리
+            </button>
+          </li>
+          <li><span className="txt">사업소 정보</span></li>
+        </ol>
+      </nav>
+
+      <div className="input-title-row">
+        <div>
+          <span className="eyebrow">입력 1단계</span>
+          <h1>사업소 정보를 입력하세요.</h1>
+          <p>평가에 공통으로 사용하는 기본정보입니다. 설비 정보는 다음 단계에서 입력합니다.</p>
+        </div>
+      </div>
+
+      <ol className="krds-step-wrap input-step" aria-label="입력 단계">
+        <li className="active">
+          <span>
+            <em className="sr-only">현재단계</em>
+            <i className="step">1단계</i>
+            <span className="step-tit">사업소 정보</span>
+          </span>
+        </li>
+        <li>
+          <span>
+            <i className="step">2단계</i>
+            <span className="step-tit">설비 정보</span>
+          </span>
+        </li>
+        <li>
+          <span>
+            <i className="step">3단계</i>
+            <span className="step-tit">방호설비</span>
+          </span>
+        </li>
+        <li>
+          <span>
+            <i className="step">4단계</i>
+            <span className="step-tit">분석조건</span>
+          </span>
+        </li>
+        <li>
+          <span>
+            <i className="step">5단계</i>
+            <span className="step-tit">결과</span>
+          </span>
+        </li>
+      </ol>
+
+      <section className="input-card" aria-labelledby="facility-info-title">
+        <div className="input-card-heading">
+          <div>
+            <h2 id="facility-info-title">사업소 기본정보</h2>
+            <p>현재 검수본에서는 입력화면의 구성과 문구를 먼저 확인합니다.</p>
+          </div>
+          <span className="required-note"><span aria-hidden="true">*</span> 필수 입력</span>
+        </div>
+
+        <div className="fieldset input-grid">
+          <div className="form-group">
+            <div className="form-tit">
+              <label htmlFor="facility-name">사업소명 <span className="required-mark" aria-hidden="true">*</span></label>
+            </div>
+            <div className="form-conts">
+              <input id="facility-name" className="krds-input" type="text" placeholder="사업소명을 입력하세요." />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <div className="form-tit">
+              <label htmlFor="facility-location">소재지 <span className="required-mark" aria-hidden="true">*</span></label>
+            </div>
+            <div className="form-conts">
+              <input id="facility-location" className="krds-input" type="text" placeholder="소재지를 입력하세요." />
+            </div>
+            <p className="form-hint">GIS 기능을 연결하면 지도에서 위치를 확인할 수 있습니다.</p>
+          </div>
+
+          <div className="form-group">
+            <div className="form-tit">
+              <label htmlFor="assessment-date">기준일</label>
+            </div>
+            <div className="form-conts">
+              <input id="assessment-date" className="krds-input" type="date" />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <div className="form-tit">
+              <label htmlFor="annual-throughput">연간 액화수소 인수량</label>
+            </div>
+            <div className="form-conts input-with-unit">
+              <input
+                id="annual-throughput"
+                className="krds-input"
+                type="number"
+                min="0"
+                inputMode="decimal"
+                placeholder="예: 100000"
+              />
+              <span className="input-unit">t/년</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {confirmed && (
+        <div className="review-notice" role="status">
+          <strong>입력화면 구성을 확인했습니다.</strong>
+          <span>다음 개발 단계에서는 설비 정보 화면을 연결합니다.</span>
+        </div>
+      )}
+
+      <div className="input-actions">
+        <button type="button" className="krds-btn large tertiary" onClick={onBack}>
+          이전
+        </button>
+        <button type="button" className="krds-btn large primary" onClick={() => setConfirmed(true)}>
+          입력화면 확인
+        </button>
+      </div>
     </div>
   )
 }
