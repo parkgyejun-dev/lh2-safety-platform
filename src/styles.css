@@ -351,3 +351,156 @@ button, a, input, select, textarea { font: inherit; }
   .result-path article { min-height: auto; }
   .next-step-panel { padding: 26px 22px; }
 }
+
+
+.input-page {
+  max-width: 980px;
+}
+
+.input-title-row {
+  padding: 34px 0 22px;
+}
+
+.input-title-row h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  letter-spacing: -.04em;
+}
+
+.input-title-row p {
+  margin: 14px 0 0;
+  max-width: 680px;
+  color: #667085;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+.input-step {
+  margin: 26px 0 34px;
+}
+
+.input-card {
+  border: 1px solid #e4e7eb;
+  border-radius: 24px;
+  padding: 32px;
+  background: #fff;
+}
+
+.input-card-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eceef1;
+}
+
+.input-card-heading h2 {
+  margin: 0;
+  font-size: 1.45rem;
+  letter-spacing: -.025em;
+}
+
+.input-card-heading p {
+  margin: 8px 0 0;
+  color: #667085;
+  line-height: 1.6;
+}
+
+.required-note {
+  white-space: nowrap;
+  color: #667085;
+  font-size: .85rem;
+}
+
+.required-note span,
+.required-mark {
+  color: #d92d20;
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 24px;
+  margin-top: 30px;
+}
+
+.input-grid .form-group {
+  margin: 0;
+}
+
+.input-grid .form-tit {
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.input-grid .form-hint {
+  margin-top: 8px;
+  color: #667085;
+  font-size: .86rem;
+  line-height: 1.5;
+}
+
+.input-with-unit {
+  position: relative;
+}
+
+.input-with-unit .krds-input {
+  padding-right: 72px;
+}
+
+.input-unit {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #667085;
+  font-size: .9rem;
+  pointer-events: none;
+}
+
+.review-notice {
+  margin-top: 18px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: #f0f7ff;
+  display: grid;
+  gap: 4px;
+  color: #1d2939;
+}
+
+.review-notice span {
+  color: #667085;
+  font-size: .92rem;
+}
+
+.input-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+@media (max-width: 720px) {
+  .input-card {
+    padding: 24px 20px;
+  }
+
+  .input-card-heading {
+    flex-direction: column;
+  }
+
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .input-step {
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  .input-actions .krds-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
