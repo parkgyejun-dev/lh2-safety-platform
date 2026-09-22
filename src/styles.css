@@ -1,0 +1,235 @@
+:root {
+  font-family: "Pretendard GOV", "Pretendard", "Noto Sans KR", Arial, sans-serif;
+  color: var(--krds-light-color-text-basic, #1d1d1d);
+  background: #fff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #fff;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.page-root {
+  min-height: 60vh;
+}
+
+.page-section {
+  padding: 6.4rem 0;
+}
+
+.hero-section {
+  padding-top: 7.2rem;
+  padding-bottom: 6.4rem;
+}
+
+.page-content {
+  padding-top: 3.2rem;
+  padding-bottom: 8rem;
+}
+
+.service-brand-button {
+  display: grid;
+  gap: .2rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.service-brand-kicker {
+  color: var(--krds-light-color-text-subtle, #555);
+  font-size: 1.3rem;
+}
+
+.service-brand-title {
+  font-size: 2rem;
+  letter-spacing: -.02em;
+}
+
+.home-hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(28rem, .7fr);
+  gap: 6.4rem;
+  align-items: end;
+}
+
+.home-hero-main .page-title-wrap {
+  margin-top: 1.6rem;
+}
+
+.home-hero-main .h-tit {
+  max-width: 76rem;
+}
+
+.hero-description,
+.progress-description {
+  max-width: 68rem;
+  margin: 2rem 0 0;
+  color: var(--krds-light-color-text-subtle, #555);
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.home-progress {
+  padding-left: 3.2rem;
+  border-left: .1rem solid var(--krds-light-color-border-gray-light, #e4e4e4);
+}
+
+.progress-number {
+  margin: 1.6rem 0 .8rem;
+  font-size: 4.8rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.progress-title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 3.2rem;
+}
+
+.button-group.between {
+  justify-content: space-between;
+}
+
+.module-structured-list {
+  margin-top: 3.2rem;
+}
+
+.content-section {
+  margin-top: 5.6rem;
+}
+
+.section-title-wrap {
+  margin-bottom: 2.4rem;
+}
+
+.action-section {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3.2rem;
+  padding-top: 4rem;
+  border-top: .1rem solid var(--krds-light-color-border-gray-light, #e4e4e4);
+}
+
+.breadcrumb-link {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.facility-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3.2rem 2.4rem;
+}
+
+.review-status {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 2.4rem;
+}
+
+.review-status p {
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .page-section {
+    padding: 4.8rem 0;
+  }
+
+  .hero-section {
+    padding-top: 5.6rem;
+  }
+
+  .home-hero-layout {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .home-progress {
+    padding-left: 0;
+    padding-top: 2.4rem;
+    border-left: 0;
+    border-top: .1rem solid var(--krds-light-color-border-gray-light, #e4e4e4);
+  }
+
+  .page-title-wrap.between,
+  .action-section {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .facility-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-actions .krds-badge {
+    display: none;
+  }
+
+  .service-brand-kicker {
+    display: none;
+  }
+
+  .service-brand-title {
+    font-size: 1.6rem;
+  }
+
+  .page-content {
+    padding-top: 2.4rem;
+    padding-bottom: 5.6rem;
+  }
+
+  .button-group .krds-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .button-group.between {
+    flex-direction: column-reverse;
+  }
+
+  .krds-step-wrap {
+    overflow-x: auto;
+  }
+
+  .review-status {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
